@@ -4,13 +4,11 @@ import Leaderboard from "./components/LeaderBoard";
 import NavBar from "./components/NavBar";
 
 function App(): JSX.Element {
-  const [view, setView] = useState<"VotePage" | "LeaderboardPage">("VotePage")
+  const [view, setView] = useState<"VotePage" | "LeaderboardPage">("VotePage");
   return (
     <>
-      <NavBar setView = {setView}/>
-      {view === "VotePage" ?
-      <HomePage /> : <Leaderboard/>
-      }
+      <NavBar setView={setView} />
+      {view === "VotePage" ? <HomePage /> : <Leaderboard />}
     </>
   );
 }
