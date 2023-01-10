@@ -6,8 +6,8 @@ import { BreedData } from "./HomePage";
 //   { id: 5, name: "retriever", score: 30 },
 // ];
 
-interface LeaderboardProps{
-  leaderboard: BreedData[]
+interface LeaderboardProps {
+  leaderboard: BreedData[];
 }
 
 function Leaderboard(props: LeaderboardProps): JSX.Element {

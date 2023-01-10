@@ -12,39 +12,39 @@ function App(): JSX.Element {
   const [view, setView] = useState<"VotePage" | "LeaderboardPage">("VotePage");
   const [leaderboard, setLeaderboard] = useState<BreedData[]>([]);
   const randomiseBreed = (): number[] => {
-    let different = true
+    let different = true;
     let index1 = 0;
     let index2 = 0;
     while (different) {
-      index1 = Math.floor(Math.random()*181); 
-      index2 = Math.floor(Math.random()*181);
-    if (index1 !== index2){
-      different = false
+      index1 = Math.floor(Math.random() * 181);
+      index2 = Math.floor(Math.random() * 181);
+      if (index1 !== index2) {
+        different = false;
+      }
     }
-    }
-    return [index1, index2]
-  }
+    return [index1, index2];
+  };
   useEffect(() => {
     fetchAllData();
     fetchAndStoreImages();
   }, []);
   //get all data - will run on every initial launch
-   async function fetchAllData() {
+  async function fetchAllData() {
     const fetchedData = await axios.get(`${url}/dogs/breeds`);
-    const allData = fetchedData.data
+    const allData = fetchedData.data;
     const breedNames = allData.map((breedData: BreedData) => {
       return breedData.breedname;
-    })
+    });
     const allLeaderboardData = await axios.get(`${url}/dogs/leaderboard`);
     const leaderboardData = allLeaderboardData.data;
     setAllBreeds(breedNames);
     setLeaderboard(leaderboardData);
-    console.log(breedNames)
+    console.log(breedNames);
   }
-   //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
-   async function fetchAndStoreImages() {
+  //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
+  async function fetchAndStoreImages() {
     // {allBreeds[randomiseBreed()[1]]}
-    const breedIndeces = randomiseBreed()
+    const breedIndeces = randomiseBreed();
     const image1 = await axios.get(
       `https://dog.ceo/api/breed/${allBreeds[breedIndeces[0]]}/images/random`
     );
@@ -59,7 +59,15 @@ function App(): JSX.Element {
   return (
     <>
       <NavBar setView={setView} />
-      {view === "VotePage" ? <HomePage fetchAndStoreImages={fetchAndStoreImages} image1={image1} image2={image2}/> : <Leaderboard leaderboard={leaderboard}/>}
+      {view === "VotePage" ? (
+        <HomePage
+          fetchAndStoreImages={fetchAndStoreImages}
+          image1={image1}
+          image2={image2}
+        />
+      ) : (
+        <Leaderboard leaderboard={leaderboard} />
+      )}
     </>
   );
 }
