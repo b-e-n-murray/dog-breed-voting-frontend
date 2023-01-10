@@ -1,5 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+export const url = 'https://dog-breed-voting-backend.onrender.com'
+//  : 'https://localhost:4000'
+//  process.env.NODE_ENV === "production" ? 
+interface BreedData{
+    id: number;
+    breedname: string;
+    score: number;
+}
 
 function HomePage(): JSX.Element {
   // const randomiseBreed = () =>{
@@ -9,13 +18,25 @@ function HomePage(): JSX.Element {
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
 
-  // async function fetchAndStoreBreeds() {
-  //     const fetchedData = await axios.get('')
-  //     const allBreeds :string[]= fetchedData.map(obj => {return(Object.breedName)})
+  useEffect(() => {
+    fetchAndStoreBreeds()
+  }, [])
 
-  // console.log(fetchedData)
-  //     setImage(fetchedData.data.message)
-  // }
+  //get all data - will run on every initial launch
+  async function fetchAndStoreBreeds() {
+      const fetchedData = await axios.get(`${url}/dogs/breeds`)
+      const allBreeds : string[] = fetchedData.data.map((breedData : BreedData) => {return(breedData.breedname)})
+
+  console.log(fetchedData)
+  console.log(allBreeds)
+    //   setImage(fetchedData.data.message)
+  }
+
+//   //get top ten breeds from leaderboard table with their respective scores
+//   async function fetchAndStoreLeaderboard(): JSX.Element {
+//     const fetchedData = await axios.get(`${url}/dogs/leaderboard`)
+//     const allScores : LeaderboardData[] = fetchedData.map()
+//   }
 
   //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
   async function fetchAndStoreImages() {
