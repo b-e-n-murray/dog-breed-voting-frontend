@@ -11,27 +11,45 @@ interface BreedData {
 }
 
 function HomePage(): JSX.Element {
-  // const randomiseBreed = () =>{
-
-  // }
+  
 
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
+  const [allBreeds, setAllBreeds] = useState<string[]>([]);
+  const [leaderboard, setLeaderboard] = useState<BreedData[]>([])
+
 
   useEffect(() => {
-    fetchAndStoreBreeds();
+    fetchAllData();
+    fetchAndStoreImages();
   }, []);
 
   //get all data - will run on every initial launch
-  async function fetchAndStoreBreeds() {
+  async function fetchAllData() {
     const fetchedData = await axios.get(`${url}/dogs/breeds`);
-    const allBreeds: string[] = fetchedData.data.map((breedData: BreedData) => {
+    const allData = fetchedData.data
+    const breedNames = allData.map((breedData: BreedData) => {
       return breedData.breedname;
-    });
+    })
+    setAllBreeds(breedNames);
+    setLeaderboard(allData);
+    console.log(breedNames)
+  }
 
-    console.log(fetchedData);
-    console.log(allBreeds);
-    //   setImage(fetchedData.data.message)
+
+
+  const randomiseBreed = (): number[] => {
+    let different = true
+    let index1 = 0;
+    let index2 = 0;
+    while (different) {
+      index1 = Math.floor(Math.random()*181); 
+      index2 = Math.floor(Math.random()*181);
+    if (index1 !== index2){
+      different = false
+    }
+    }
+    return [index1, index2]
   }
 
   //   //get top ten breeds from leaderboard table with their respective scores
@@ -42,11 +60,13 @@ function HomePage(): JSX.Element {
 
   //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
   async function fetchAndStoreImages() {
+    // {allBreeds[randomiseBreed()[1]]}
+    const breedIndeces = randomiseBreed()
     const image1 = await axios.get(
-      `https://dog.ceo/api/breed/pug/images/random`
+      `https://dog.ceo/api/breed/${allBreeds[breedIndeces[0]]}/images/random`
     );
     const image2 = await axios.get(
-      `https://dog.ceo/api/breed/boxer/images/random`
+      `https://dog.ceo/api/breed/${allBreeds[breedIndeces[1]]}/images/random`
     );
     console.log(image1);
     setImage1(image1.data.message);
