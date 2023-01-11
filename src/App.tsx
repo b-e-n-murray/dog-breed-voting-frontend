@@ -5,6 +5,7 @@ import Leaderboard from "./components/LeaderBoard";
 import NavBar from "./components/NavBar";
 import { url } from "./components/HomePage";
 import { randomiseBreed } from "./utils/randomiseBreed";
+import "./App.css"
 
 function App(): JSX.Element {
   const [allBreeds, setAllBreeds] = useState<string[]>([]);
