@@ -7,10 +7,14 @@ import { url } from "./components/HomePage";
 import { randomiseBreed } from "./utils/randomiseBreed";
 import "./App.css";
 
+export interface Image {
+  breedname: string;
+  url: string;
+}
 function App(): JSX.Element {
   const [allBreeds, setAllBreeds] = useState<string[]>([]);
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
+  const [image1, setImage1] = useState<Image>({ breedname: "", url: "" });
+  const [image2, setImage2] = useState<Image>({ breedname: "", url: "" });
   const [view, setView] = useState<"VotePage" | "LeaderboardPage">("VotePage");
 
   const fetchAllData = useCallback(async () => {
@@ -33,15 +37,17 @@ function App(): JSX.Element {
   //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
   async function fetchAndStoreImages(breedNames: string[]) {
     const breedIndeces = randomiseBreed(); // => [x, y]
+    const breedOne = breedNames[breedIndeces[0]];
+    const breedTwo = breedNames[breedIndeces[1]];
     const image1 = await axios.get(
-      `https://dog.ceo/api/breed/${breedNames[breedIndeces[0]]}/images/random`
+      `https://dog.ceo/api/breed/${breedOne}/images/random`
     );
     const image2 = await axios.get(
-      `https://dog.ceo/api/breed/${breedNames[breedIndeces[1]]}/images/random`
+      `https://dog.ceo/api/breed/${breedTwo}/images/random`
     );
     console.log(image1);
-    setImage1(image1.data.message);
-    setImage2(image2.data.message);
+    setImage1({ breedname: breedOne, url: image1.data.message });
+    setImage2({ breedname: breedTwo, url: image2.data.message });
   }
 
   return (
