@@ -11,12 +11,11 @@ function App(): JSX.Element {
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [view, setView] = useState<"VotePage" | "LeaderboardPage">("VotePage");
-  
 
   useEffect(() => {
-    fetchAllData()
+    fetchAllData();
   }, []);
-  
+
   //get all data - will run on every initial launch
   async function fetchAllData() {
     const fetchedData = await axios.get(`${url}/dogs/breeds`);
@@ -24,24 +23,23 @@ function App(): JSX.Element {
     const breedNames = allData.map((breedData: BreedData) => {
       return breedData.breedname;
     });
-      setAllBreeds(breedNames);
-      console.log(breedNames);
-      fetchAndStoreImages(breedNames)
+    setAllBreeds(breedNames);
+    console.log(breedNames);
+    fetchAndStoreImages(breedNames);
   }
-
 
   //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
   async function fetchAndStoreImages(breedNames: string[]) {
-      const breedIndeces = randomiseBreed(); // => [x, y]
-      const image1 = await axios.get(
-        `https://dog.ceo/api/breed/${breedNames[breedIndeces[0]]}/images/random`
-      );
-      const image2 = await axios.get(
-        `https://dog.ceo/api/breed/${breedNames[breedIndeces[1]]}/images/random`
-      );
-      console.log(image1);
-      setImage1(image1.data.message);
-      setImage2(image2.data.message);
+    const breedIndeces = randomiseBreed(); // => [x, y]
+    const image1 = await axios.get(
+      `https://dog.ceo/api/breed/${breedNames[breedIndeces[0]]}/images/random`
+    );
+    const image2 = await axios.get(
+      `https://dog.ceo/api/breed/${breedNames[breedIndeces[1]]}/images/random`
+    );
+    console.log(image1);
+    setImage1(image1.data.message);
+    setImage2(image2.data.message);
   }
 
   return (
@@ -54,7 +52,7 @@ function App(): JSX.Element {
           image2={image2}
         />
       ) : (
-        <Leaderboard  />
+        <Leaderboard />
       )}
     </>
   );
