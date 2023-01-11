@@ -58,6 +58,7 @@ function Leaderboard(): JSX.Element {
     <>
       <h1>Leaderboard</h1>
       <button onClick={fetchAllData}>Refresh Leaderboard</button>
+      <div className="table">
       <table>
         <tr>
           <th>Breed</th>
@@ -70,19 +71,20 @@ function Leaderboard(): JSX.Element {
           </tr>
         ))}
       </table>
+      </div>
       <>
-        <div className = "leaderboard-img">
-          <div>
+        <div className = "podium">
+          <div className = "first">
           <img src={images?.imageOne} alt="" />
-          <p>🥇</p>
+          <p className = "medals">🥇</p>
           </div>
-          <div>
+          <div className = "second">
           <img src={images?.imageTwo} alt="" />
-          <p>🥈</p>
+          <p className = "medals">🥈</p>
           </div>
-          <div>
+          <div className = "third">
           <img src={images?.imageThree} alt="" />
-          <p>🥉</p>
+          <p className = "medals">🥉</p>
           </div>
         </div>
       </>
