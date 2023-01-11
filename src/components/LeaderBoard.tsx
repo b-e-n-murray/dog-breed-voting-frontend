@@ -2,6 +2,7 @@ import { BreedData } from "./HomePage";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "./HomePage";
+import "../App.css"
 
 
 interface Iimage {
@@ -70,10 +71,19 @@ function Leaderboard(): JSX.Element {
         ))}
       </table>
       <>
-        <div>
+        <div className = "leaderboard-img">
+          <div>
           <img src={images?.imageOne} alt="" />
+          <p>🥇</p>
+          </div>
+          <div>
           <img src={images?.imageTwo} alt="" />
+          <p>🥈</p>
+          </div>
+          <div>
           <img src={images?.imageThree} alt="" />
+          <p>🥉</p>
+          </div>
         </div>
       </>
     </>
