@@ -11,7 +11,7 @@ function App(): JSX.Element {
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [view, setView] = useState<"VotePage" | "LeaderboardPage">("VotePage");
-  const [leaderboard, setLeaderboard] = useState<BreedData[]>([]);
+  
 
   useEffect(() => {
     fetchAllData()
@@ -24,13 +24,12 @@ function App(): JSX.Element {
     const breedNames = allData.map((breedData: BreedData) => {
       return breedData.breedname;
     });
-    const allLeaderboardData = await axios.get(`${url}/dogs/leaderboard`);
-    const leaderboardData = allLeaderboardData.data;
-    setAllBreeds(breedNames);
-    setLeaderboard(leaderboardData);
-    console.log(breedNames);
-    fetchAndStoreImages(breedNames)
+      setAllBreeds(breedNames);
+      console.log(breedNames);
+      fetchAndStoreImages(breedNames)
   }
+
+
   //take 2 random breeds and make sure they are different-> breeds, breed[0], breed[1], randomiseBreed()[0]
   async function fetchAndStoreImages(breedNames: string[]) {
       const breedIndeces = randomiseBreed(); // => [x, y]
@@ -55,7 +54,7 @@ function App(): JSX.Element {
           image2={image2}
         />
       ) : (
-        <Leaderboard leaderboard={leaderboard} />
+        <Leaderboard  />
       )}
     </>
   );
