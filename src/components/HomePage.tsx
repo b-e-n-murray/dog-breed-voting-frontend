@@ -21,8 +21,8 @@ function HomePage({
     <>
       <h1>Dog Breed Voting App</h1>
       <button onClick={fetchAndStoreImages}>Get dog</button>
-      <img src={image1} alt="random dog"></img>
-      <img src={image2} alt="random dog"></img>
+      <img src={image1} alt="random dog" className="voteImage"></img>
+      <img src={image2} alt="random dog" className="voteImage"></img>
     </>
   );
 }
