@@ -1,4 +1,7 @@
 import { BreedData } from "./HomePage";
+import { useState } from "react";
+import axios from "axios";
+import { url } from "./HomePage";
 
 // const topDogs = [
 //   { id: 10, name: "pug", score: 100 },
@@ -6,20 +9,29 @@ import { BreedData } from "./HomePage";
 //   { id: 5, name: "retriever", score: 30 },
 // ];
 
-interface LeaderboardProps {
-  leaderboard: BreedData[];
-}
+// interface LeaderboardProps {
+//   leaderboard: BreedData[];
+// }
 
-function Leaderboard(props: LeaderboardProps): JSX.Element {
+function Leaderboard(): JSX.Element {
+  const [leaderboard, setLeaderboard] = useState<BreedData[]>([]);
+
+  async function fetchLeaderboard() {
+    const allLeaderboardData = await axios.get(`${url}/dogs/leaderboard`);
+    const leaderboardData = allLeaderboardData.data;
+    setLeaderboard(leaderboardData);
+  }
+
   return (
     <>
       <h1>Leaderboard</h1>
+      <button onClick={fetchLeaderboard}>Refresh Leaderboard</button>
       <table>
         <tr>
           <th>Breed</th>
           <th>Score</th>
         </tr>
-        {props.leaderboard.map((dog) => (
+        {leaderboard.map((dog) => (
           <tr key={dog.id}>
             <td>{dog.breedname}</td>
             <td>{dog.score}</td>
