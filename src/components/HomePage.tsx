@@ -3,7 +3,7 @@ import { Image } from "../App";
 import { formatBreedname } from "../utils/formatBreedname";
 
 export const url =
-  process.env.NODE_ENV !== "production"
+  process.env.NODE_ENV === "production"
     ? "https://dog-breed-voting-backend.onrender.com"
     : "http://localhost:4000";
 

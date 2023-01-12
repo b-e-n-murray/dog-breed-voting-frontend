@@ -19,6 +19,7 @@ body {
     linear-gradient(to top right, rgb(83, 219, 237), transparent);
   background-blend-mode: screen;
 }
+
 .breedname-txt {
   text-align: center;
   font-size: x-large;
