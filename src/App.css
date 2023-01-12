@@ -2,9 +2,26 @@
   height: 55vh;
   width: 30vw;
   padding: 50px;
+  margin-left: 10px;
+}
+.image1:hover{
+cursor:pointer
+}
+.image2:hover{
+cursor:pointer
+
 }
 
+.img-ctn{
+  display:flex
+}
+body{
 
+  font-family: 'Chicle', cursive;
+}
+.breedname-txt{
+  text-align:center;
+}
 /* Leaderboard */
 .podium {
   display: grid;
