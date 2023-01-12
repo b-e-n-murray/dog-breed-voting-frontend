@@ -14,7 +14,10 @@
 
 body {
   font-family: "Chicle", cursive;
-  background-color: rgba(246, 244, 244, 0.939);
+  background: linear-gradient(rgb(228, 137, 221), transparent),
+    linear-gradient(to top left, rgb(244, 242, 211), transparent),
+    linear-gradient(to top right, rgb(83, 219, 237), transparent);
+  background-blend-mode: screen;
 }
 .breedname-txt {
   text-align: center;
@@ -72,9 +75,7 @@ img {
   text-align: center;
   font-family: "Chicle", cursive;
 }
-body {
-  min-height: 100%;
-}
+
 
 /* CSS */
 .button-53 {
