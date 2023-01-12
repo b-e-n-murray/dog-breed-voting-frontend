@@ -1,17 +1,9 @@
 import { BreedData } from "./HomePage";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "./HomePage";
+import "../App.css"
 
-// const topDogs = [
-//   { id: 10, name: "pug", score: 100 },
-//   { id: 20, name: "spaniel", score: 50 },
-//   { id: 5, name: "retriever", score: 30 },
-// ];
-
-// interface LeaderboardProps {
-//   leaderboard: BreedData[];
-// }
 
 interface Iimage {
   imageOne: string;
@@ -26,7 +18,8 @@ function Leaderboard(): JSX.Element {
     imageTwo: "",
     imageThree: "",
   });
-
+ 
+  
   async function fetchLeaderboard(): Promise<BreedData[]> {
     const allLeaderboardData = await axios.get(`${url}/dogs/leaderboard`);
     const leaderboardData = allLeaderboardData.data;
@@ -53,16 +46,19 @@ function Leaderboard(): JSX.Element {
     });
   }
 
-  const fetchAllData = async () => {
+  const fetchAllData = useCallback(async () => {
     const newLeaderboard = await fetchLeaderboard();
     await fetchTopThree(newLeaderboard);
-  };
+  }, [])
+  useEffect(()=>{
+    fetchAllData()
+  }, [fetchAllData])
 
   return (
     <>
       <h1>Leaderboard</h1>
       <button onClick={fetchAllData}>Refresh Leaderboard</button>
-      <button onClick={() => fetchTopThree(leaderboard)}> Show 3</button>
+      <div className="table">
       <table>
         <tr>
           <th>Breed</th>
@@ -75,11 +71,21 @@ function Leaderboard(): JSX.Element {
           </tr>
         ))}
       </table>
+      </div>
       <>
-        <div>
+        <div className = "podium">
+          <div className = "first">
           <img src={images?.imageOne} alt="" />
+          <p className = "medals">🥇</p>
+          </div>
+          <div className = "second">
           <img src={images?.imageTwo} alt="" />
+          <p className = "medals">🥈</p>
+          </div>
+          <div className = "third">
           <img src={images?.imageThree} alt="" />
+          <p className = "medals">🥉</p>
+          </div>
         </div>
       </>
     </>
