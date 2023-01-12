@@ -31,15 +31,21 @@ function HomePage({
 
   return (
     <>
+     <div className = "wholePage">
       <h1>Dog Breed Voting App</h1>
-      <div className = "img-ctn">
-      <div onClick={() => submitVote(image1.breedname)} className="image1">
+      <div className = "dogPage">
+      <span className = "dogCard">
+      <div onClick={() => submitVote(image1.breedname)}>
         <img src={image1.url} alt="random dog" className="voteImage"></img>
-        <h4 className = "breedname-txt">{formatBreedname(image1.breedname)}</h4>
+        <h4 className = "breedname-txt">{image1.breedname}</h4>
       </div>
-      <div onClick={() => submitVote(image2.breedname)} className="image2">
+      </span>
+      <span className = "dogCard">
+      <div onClick={() => submitVote(image2.breedname)}>
         <img src={image2.url} alt="random dog" className="voteImage"></img>
-        <h4 className = "breedname-txt"> {formatBreedname(image2.breedname)}</h4>
+        <h4 className = "breedname-txt"> {image2.breedname}</h4>
+      </div>
+      </span>
       </div>
       </div>
     </>
