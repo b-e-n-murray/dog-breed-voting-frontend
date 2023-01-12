@@ -5,21 +5,23 @@ interface NavBarProps {
 function NavBar({ setView }: NavBarProps): JSX.Element {
   return (
     <>
-    <div className = "navPage">
-      <button className = "button-53"
-        onClick={() => {
-          setView("VotePage");
-        }}
-      >
-        Vote
-      </button>
-      <button className = "button-53"
-        onClick={() => {
-          setView("LeaderboardPage");
-        }}
-      >
-        Leaderboard
-      </button>
+      <div className="navPage">
+        <button
+          className="button-53"
+          onClick={() => {
+            setView("VotePage");
+          }}
+        >
+          Vote
+        </button>
+        <button
+          className="button-53"
+          onClick={() => {
+            setView("LeaderboardPage");
+          }}
+        >
+          Leaderboard
+        </button>
       </div>
     </>
   );
