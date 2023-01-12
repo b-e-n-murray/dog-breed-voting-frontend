@@ -37,13 +37,13 @@ function HomePage({
       <span className = "dogCard">
       <div onClick={() => submitVote(image1.breedname)}>
         <img src={image1.url} alt="random dog" className="voteImage"></img>
-        <h4 className = "breedname-txt">{image1.breedname}</h4>
+        <h4 className = "breedname-txt">{image1.breedname && formatBreedname(image1.breedname)}</h4>
       </div>
       </span>
       <span className = "dogCard">
       <div onClick={() => submitVote(image2.breedname)}>
         <img src={image2.url} alt="random dog" className="voteImage"></img>
-        <h4 className = "breedname-txt"> {image2.breedname}</h4>
+        <h4 className = "breedname-txt"> {image2.breedname && formatBreedname(image2.breedname)}</h4>
       </div>
       </span>
       </div>

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { url } from "./HomePage";
 import "../App.css"
+import { formatBreedname } from "../utils/formatBreedname";
 
 
 interface Iimage {
@@ -56,23 +57,29 @@ function Leaderboard(): JSX.Element {
 
   return (
     <>
-      <h1>Leaderboard</h1>
-      <button onClick={fetchAllData}>Refresh Leaderboard</button>
-      <div className="table">
-      <table>
-        <tr>
-          <th>Breed</th>
-          <th>Score</th>
-        </tr>
-        {leaderboard.map((dog) => (
-          <tr key={dog.id}>
-            <td>{dog.breedname}</td>
-            <td>{dog.score}</td>
-          </tr>
-        ))}
-      </table>
+    <div className = "wholePage">
+      <div className = "leaderboardPage">
+    <div className = "section1">
+      <h1 className="leaderboardTitle">Leaderboard</h1>
+      <button className = "button-53-leaderboard" onClick={fetchAllData}>Refresh Leaderboard</button>
+        <div className="table">
+          <table>
+            <tr>
+              <th>Breed</th>
+              <th>Score</th>
+            </tr>
+            {leaderboard.map((dog) => (
+              <tr key={dog.id}>
+                <td>{formatBreedname(dog.breedname)}</td>
+                <td>{dog.score}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
       </div>
+
       <>
+      <div className = "section2">
         <div className = "podium">
           <div className = "first">
           <img src={images?.imageOne} alt="" />
@@ -87,7 +94,11 @@ function Leaderboard(): JSX.Element {
           <p className = "medals">🥉</p>
           </div>
         </div>
+        </div>
+        
       </>
+      </div>
+      </div>
     </>
   );
 }
