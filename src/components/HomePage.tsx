@@ -1,8 +1,9 @@
 import axios from "axios";
 import { Image } from "../App";
+import { formatBreedname } from "../utils/formatBreedname";
 
 export const url =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV !== "production"
     ? "https://dog-breed-voting-backend.onrender.com"
     : "http://localhost:4000";
 
@@ -31,14 +32,16 @@ function HomePage({
   return (
     <>
       <h1>Dog Breed Voting App</h1>
+      <div className = "img-ctn">
       <div onClick={() => submitVote(image1.breedname)} className="image1">
         <img src={image1.url} alt="random dog" className="voteImage"></img>
+        <h4 className = "breedname-txt">{formatBreedname(image1.breedname)}</h4>
       </div>
-      <h4>{image1.breedname}</h4>
       <div onClick={() => submitVote(image2.breedname)} className="image2">
         <img src={image2.url} alt="random dog" className="voteImage"></img>
+        <h4 className = "breedname-txt"> {formatBreedname(image2.breedname)}</h4>
       </div>
-      <h4>{image2.breedname}</h4>
+      </div>
     </>
   );
 }
